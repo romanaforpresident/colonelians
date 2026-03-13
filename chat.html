@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+
+    <style>
+        body {
+            animation: flashbg 1s infinite;
+        }
+
+        @keyframes flashbg {
+            0% { background-color: blue; }
+            50% { background-color: green; }
+            100% { background-color: blue; }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<h1>i have lately been thinking about several little things in the northern hemisphere. wild horse dunn road hahn buena?</h1>
+
+<p>
+three hundred thousand months of hard work, and cross, dare i say, and buddha, dare i say, the tunnels are nearly seventy-five percent done. are you pleased? oh yes. we may send you to the indian canyons if you keep this up.
+</p>
+
+<p>
+f<br>
+o<br>
+d<br>
+p
+</p>
+
+</body>
+</html>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+
+    <style>
+        body {
+            animation: flashbg 1s infinite;
+        }
+
+        @keyframes flashbg {
+            0% { background-color: red; }
+            50% { background-color: pink; }
+            100% { background-color: red; }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<h1>I dont even know!you know what i know? the tunnels. wow thank you cross.</h1>
+
+<p>
+i am writing my thoughts protozoans abnormally. deal with it now
+</p>
+
+<p>
+romanaforpresident<br>
+colonelnoodle<br>
+toodamnsinister<br>
+cakeforpresident
+</p>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Simple Chatroom</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#1e1e1e;
+    color:white;
+}
+
+#chatbox{
+    width:500px;
+    height:300px;
+    border:1px solid #444;
+    overflow-y:auto;
+    padding:10px;
+    margin-bottom:10px;
+    background:#2a2a2a;
+}
+
+#message{
+    width:400px;
+    padding:8px;
+}
+
+button{
+    padding:8px 12px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>romana room</h2>
+
+<div id="chatbox"></div>
+
+<input id="username" placeholder="Your name">
+<br><br>
+
+<input id="message" placeholder="Type message...">
+<button onclick="sendMessage()">Send</button>
+
+<script>
+
+function sendMessage(){
+
+    let username = document.getElementById("username").value;
+    let message = document.getElementById("message").value;
+
+    if(username === "" || message === "") return;
+
+    let chatbox = document.getElementById("chatbox");
+
+    let msg = document.createElement("p");
+    msg.innerHTML = "<b>" + username + ":</b> " + message;
+
+    chatbox.appendChild(msg);
+
+    document.getElementById("message").value = "";
+
+    chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+</script>
+
+</body>
+</html>
