@@ -20,24 +20,45 @@
 
     
     
-<iframe id="player"
-src="https://www.youtube.com/embed/iktEeIqMDzA?autoplay=1&loop=1&playlist=iktEeIqMDzA"
-frameborder="0"
-allow="autoplay">
-</iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Background Video</title>
 
-<style>
-#player {
-  width: 0;
-  height: 0;
-  border: 0;
-}
-</style>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+    }
+
+    video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: -1;
+      pointer-events: none; /* prevents interaction */
+    }
+  </style>
+</head>
+
+<body>
+
+  <video autoplay muted loop playsinline disablePictureInPicture>
+    <source src="videoplayback.mp4" type="video/mp4">
+  </video>
+
+</body>
+</html>
 
 
-
-
-    
 </head>
 
 <body>
