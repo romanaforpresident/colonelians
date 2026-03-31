@@ -41,83 +41,183 @@ p
 </body>
 </html>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<!DOCTYPE html>
-<html>
-<head>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-<title>Realtime Chat</title>
+        .container {
+            width: 100%;
+            max-width: 600px;
+            height: 600px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
 
-<style>
-body{
-    font-family: Arial;
-    background:#1e1e1e;
-    color:white;
-}
+        .header {
+            background: #667eea;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
 
-#messages{
-    height:300px;
-    overflow-y:scroll;
-    border:1px solid #444;
-    padding:10px;
-}
+        .chat-box {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
 
-input{
-    padding:8px;
-}
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
 
-button{
-    padding:8px;
-}
-</style>
+        .message.user {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
 
+        .message.other {
+            background: white;
+            color: black;
+            border: 1px solid #ddd;
+        }
+
+        .message-time {
+            font-size: 0.75em;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+
+        .input-area {
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            min-width: 150px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #764ba2;
+        }
+
+        .username-input {
+            width: 100%;
+        }
+    </style>
 </head>
-
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>💬 Chat Room</h1>
+        </div>
+        
+        <div class="chat-box" id="chat"></div>
+        
+        <div class="input-area">
+            <input type="text" id="username" class="username-input" placeholder="Enter your name" />
+            <input type="text" id="message" placeholder="Type your message..." />
+            <button id="send">Send</button>
+        </div>
+    </div>
 
-<h2>romanas room</h2>
+    <script>
+        const chatBox = document.getElementById('chat');
+        const messageInput = document.getElementById('message');
+        const usernameInput = document.getElementById('username');
+        const sendButton = document.getElementById('send');
 
-<div id="messages"></div>
+        const messages = [];
+        let currentUsername = 'Anonymous';
 
-<input id="username" placeholder="user">
-<br><br>
+        // Update username when it changes
+        usernameInput.addEventListener('change', (e) => {
+            currentUsername = e.target.value.trim() || 'Anonymous';
+        });
 
-<input id="message" placeholder="message">
-<button onclick="sendMessage()">Send</button>
+        // Send message on button click
+        sendButton.addEventListener('click', sendMessage);
 
-<script src="/socket.io/socket.io.js"></script>
+        // Send message on Enter key
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
 
-<script>
+        function sendMessage() {
+            const messageText = messageInput.value.trim();
+            
+            if (messageText === '') return;
 
-const socket = io();
+            const timestamp = new Date().toLocaleTimeString();
+            messages.push({
+                username: currentUsername,
+                text: messageText,
+                time: timestamp,
+                isUser: true
+            });
 
-function sendMessage(){
+            messageInput.value = '';
+            updateChat();
+        }
 
-    const username = document.getElementById("username").value;
-    const message = document.getElementById("message").value;
+        function updateChat() {
+            chatBox.innerHTML = messages.map(msg => `
+                <div class="message ${msg.isUser ? 'user' : 'other'}">
+                    <strong>${msg.username}</strong>: ${msg.text}
+                    <div class="message-time">${msg.time}</div>
+                </div>
+            `).join('');
 
-    socket.emit("chat message", username + ": " + message);
-
-    document.getElementById("message").value = "";
-}
-
-socket.on("chat message", function(msg){
-
-    const div = document.getElementById("messages");
-
-    const p = document.createElement("p");
-    p.textContent = msg;
-
-    div.appendChild(p);
-
-    div.scrollTop = div.scrollHeight;
-
-});
-
-</script>
-
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
 </body>
 </html>
 
