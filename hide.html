@@ -40,7 +40,8 @@ body {
     text-align: center;
 }
 
-button {
+#dingButton {
+    position: absolute;
     padding: 12px 24px;
     font-size: 18px;
     cursor: pointer;
@@ -59,7 +60,7 @@ button {
     <p>notsofastlilniggalol</p>
 
     <input type="password" id="codeInput" placeholder="supersecretphrasehereplease">
-    <button onclick="checkCode()">ding</button>
+    <button id="dingButton" onclick="checkCode()">ding</button>
 
     <div id="error"></div>
 </div>
@@ -72,13 +73,51 @@ button {
 <script>
 const ACCESS_CODE = "pingthefox";
 
+const dingButton = document.getElementById("dingButton");
+
+// Start button near the center
+dingButton.style.left = "50%";
+dingButton.style.top = "55%";
+dingButton.style.transform = "translate(-50%, -50%)";
+
+// Random number of dodges (1-10)
+let movesRemaining = Math.floor(Math.random() * 10) + 1;
+
+function moveButton() {
+    if (movesRemaining <= 0) return;
+
+    const maxX = window.innerWidth - dingButton.offsetWidth;
+    const maxY = window.innerHeight - dingButton.offsetHeight;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    dingButton.style.transform = "none";
+    dingButton.style.left = randomX + "px";
+    dingButton.style.top = randomY + "px";
+
+    movesRemaining--;
+}
+
+// Dodge when the mouse gets over it
+dingButton.addEventListener("mouseenter", moveButton);
+
 function checkCode() {
+    // If dodges remain, move instead of allowing click
+    if (movesRemaining > 0) {
+        moveButton();
+        return;
+    }
+
     const enteredCode = document.getElementById("codeInput").value;
 
     if (enteredCode === ACCESS_CODE) {
         document.getElementById("lockScreen").style.display = "none";
     } else {
         document.getElementById("error").textContent = "Incorrect code.";
+
+        // New random dodge count after wrong password
+        movesRemaining = Math.floor(Math.random() * 10) + 1;
     }
 }
 </script>
