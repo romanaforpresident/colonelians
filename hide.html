@@ -1,6 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>themuseum</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>palacemuseum</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Page content */
+#content {
+    padding: 40px;
+}
+
+/* Full-screen lock screen */
+#lockScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#codeInput {
+    padding: 12px;
+    font-size: 18px;
+    margin: 10px;
+    width: 250px;
+    text-align: center;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#error {
+    color: red;
+    margin-top: 10px;
+}
+</style>
 </head>
-    <body style="background-color:#65931e;">
+<body>
+
+<div id="lockScreen">
+    <h1>Access Restricted</h1>
+    <p>Enter the access code:</p>
+
+    <input type="password" id="codeInput" placeholder="Enter code">
+    <button onclick="checkCode()">Enter</button>
+
+    <div id="error"></div>
+</div>
+
+<div id="content">
+    <h1>Secret Website Content</h1>
+    <p>This content is hidden until the correct code is entered.</p>
+</div>
+
+<script>
+const ACCESS_CODE = "pingthefox";
+
+function checkCode() {
+    const enteredCode = document.getElementById("codeInput").value;
+
+    if (enteredCode === ACCESS_CODE) {
+        document.getElementById("lockScreen").style.display = "none";
+    } else {
+        document.getElementById("error").textContent = "Incorrect code.";
+    }
+}
+</script>
+
+</body>
+</html>
