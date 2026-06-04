@@ -9,28 +9,29 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-}
-
-/* Page content */
-#content {
-    padding: 40px;
     background: black;
     color: white;
-    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* Make ASCII art white too */
+#content {
+    padding: 40px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
 .ascii-art {
     color: white;
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre;
+    padding: 10px 0;
 }
 
-/* Full-screen lock screen */
 #lockScreen {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: #111;
     color: white;
     display: flex;
@@ -58,6 +59,7 @@ body {
 #error {
     color: red;
     margin-top: 10px;
+    min-height: 20px;
 }
 </style>
 </head>
@@ -67,32 +69,30 @@ body {
     <h1>lol?</h1>
     <p>notsofastlilniggalol</p>
 
-    <input type="password" id="codeInput" placeholder="supersecretphrasehereplease">
-    <button id="dingButton" onclick="checkCode()">ding</button>
+    <input
+        type="password"
+        id="codeInput"
+        placeholder="supersecretphrasehereplease"
+    >
+
+    <button id="dingButton" onclick="checkCode()">
+        ding
+    </button>
 
     <div id="error"></div>
 </div>
 
 <div id="content">
     <h1>SUPER SECRET DO NOT ENTER!</h1>
-    <p>you think its that easy my boy?crycrycrycryLOLOLOLOLOL.
-    well, while youre here:
+
+    <p>
+        you think its that easy my boy? crycrycrycryLOLOLOLOLOL.
+        well, while youre here:
     </p>
 
-<pre class="ascii-art">
-$$\   $$\                               $$$$$$$\                                          $$\       $$$$$$$$\                                  $$\                                           $$\                                   
-$$ |  $$ |                              $$  __$$\                                         $$ |      $$  _____|                                 $$ |                                          \__|                                  
-$$ |  $$ | $$$$$$\  $$\   $$\           $$ |  $$ | $$$$$$\ $$\    $$\  $$$$$$\  $$$$$$$\  $$ |      $$ |    $$$$$$\  $$\   $$\ $$$$$$$\   $$$$$$$ |      $$\   $$\  $$$$$$\        $$$$$$$\  $$\  $$$$$$\   $$$$$$\   $$$$$$\      
-$$$$$$$$ |$$  __$$\ $$ |  $$ |          $$ |  $$ |$$  __$$\\$$\  $$  |$$  __$$\ $$  __$$\ $$ |      $$$$$\ $$  __$$\ $$ |  $$ |$$  __$$\ $$  __$$ |      $$ |  $$ | \____$$\       $$  __$$\ $$ |$$  __$$\ $$  __$$\  \____$$\     
-$$  __$$ |$$$$$$$$ |$$ |  $$ |          $$ |  $$ |$$$$$$$$ |\$$\$$  / $$ /  $$ |$$ |  $$ |\__|      $$  __|$$ /  $$ |$$ |  $$ |$$ |  $$ |$$ /  $$ |      $$ |  $$ | $$$$$$$ |      $$ |  $$ |$$ |$$ /  $$ |$$ /  $$ | $$$$$$$ |    
-$$ |  $$ |$$   ____|$$ |  $$ |          $$ |  $$ |$$   ____| \$$$  /  $$ |  $$ |$$ |  $$ |          $$ |   $$ |  $$ |$$ |  $$ |$$ |  $$ |$$ |  $$ |      $$ |  $$ |$$  __$$ |      $$ |  $$ |$$ |$$ |  $$ |$$ |  $$ |$$  __$$ |    
-$$ |  $$ |\$$$$$$$\ \$$$$$$$ |$$\       $$$$$$$  |\$$$$$$$\   \$  /   \$$$$$$  |$$ |  $$ |$$\       $$ |   \$$$$$$  |\$$$$$$  |$$ |  $$ |\$$$$$$$ |      \$$$$$$$ |\$$$$$$$ |      $$ |  $$ |$$ |\$$$$$$$ |\$$$$$$$ |\$$$$$$$ |$$\ 
-\__|  \__| \_______| \____$$ |$  |      \_______/  \_______|   \_/     \______/ \__|  \__|\__|      \__|    \______/  \______/ \__|  \__| \_______|       \____$$ | \_______|      \__|  \__|\__| \____$$ | \____$$ | \_______|\__|
-                    $$\   $$ |\_/                                                                                                                        $$\   $$ |                              $$\   $$ |$$\   $$ |
-                    \$$$$$$  |                                                                                                                           \$$$$$$  |                              \$$$$$$  |\$$$$$$  |
-                     \______/                                                                                                                             \______/                                \______/  \______/
-</pre>
-
+    <pre class="ascii-art">
+YOUR ASCII ART HERE
+    </pre>
 </div>
 
 <script>
@@ -100,12 +100,12 @@ const ACCESS_CODE = "pingthefox";
 
 const dingButton = document.getElementById("dingButton");
 
-// Start button near the center
+// Start near center
 dingButton.style.left = "50%";
 dingButton.style.top = "40%";
 dingButton.style.transform = "translate(-50%, -50%)";
 
-// Random number of dodges (1-10)
+// Random dodges (1–10)
 let movesRemaining = Math.floor(Math.random() * 10) + 1;
 
 function moveButton() {
@@ -124,27 +124,37 @@ function moveButton() {
     movesRemaining--;
 }
 
-// Dodge when the mouse gets over it
 dingButton.addEventListener("mouseenter", moveButton);
 
 function checkCode() {
-    // If dodges remain, move instead of allowing click
     if (movesRemaining > 0) {
         moveButton();
         return;
     }
 
-    const enteredCode = document.getElementById("codeInput").value;
+    const enteredCode =
+        document.getElementById("codeInput").value;
 
     if (enteredCode === ACCESS_CODE) {
         document.getElementById("lockScreen").style.display = "none";
+        window.scrollTo(0, 0);
     } else {
-        document.getElementById("error").textContent = "Incorrect code.";
+        document.getElementById("error").textContent =
+            "Incorrect code.";
 
-        // New random dodge count after wrong password
-        movesRemaining = Math.floor(Math.random() * 10) + 1;
+        movesRemaining =
+            Math.floor(Math.random() * 10) + 1;
     }
 }
+
+// Press Enter to submit
+document
+    .getElementById("codeInput")
+    .addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            checkCode();
+        }
+    });
 </script>
 
 </body>
