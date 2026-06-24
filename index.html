@@ -11,6 +11,21 @@
     <link rel="manifest" href="/faviconss/site.webmanifest">
 
     <style>
+        body {
+            margin: 0;
+            animation: bgChange 15s infinite linear;
+        }
+
+        @keyframes bgChange {
+            0%   { background-color: #ff0000; }
+            16%  { background-color: #ff8000; }
+            33%  { background-color: #ffff00; }
+            50%  { background-color: #00ff00; }
+            66%  { background-color: #0080ff; }
+            83%  { background-color: #8000ff; }
+            100% { background-color: #ff0000; }
+        }
+
         .top-image {
             display: block;
             margin: 20px auto 0 auto;
@@ -20,9 +35,9 @@
     </style>
 </head>
 
-<body style="background-color:#000000;">
+<body>
 
-   <img src="/img/colonelianswebsite.png" alt="Image" class="top-image">
+    <img src="/img/colonelianswebsite.png" alt="Image" class="top-image">
 
 </body>
 </html>
