@@ -11,35 +11,84 @@
     <link rel="manifest" href="/faviconss/site.webmanifest">
 
     <style>
-        body {
-            margin: 0;
-            animation: bgChange 10s infinite linear;
+
+        body{
+            margin:0;
+            animation:bgChange 10s infinite linear;
+            font-family:Arial, Helvetica, sans-serif;
         }
 
-        @keyframes bgChange {
-            0%   { background-color: #ff0000; }
-            16%  { background-color: #ff8000; }
-            33%  { background-color: #ffff00; }
-            50%  { background-color: #00ff00; }
-            66%  { background-color: #0080ff; }
-            83%  { background-color: #8000ff; }
-            100% { background-color: #ff0000; }
+        @keyframes bgChange{
+            0%   { background-color:#ff0000; }
+            16%  { background-color:#ff8000; }
+            33%  { background-color:#ffff00; }
+            50%  { background-color:#00ff00; }
+            66%  { background-color:#0080ff; }
+            83%  { background-color:#8000ff; }
+            100% { background-color:#ff0000; }
         }
 
-        .top-image {
-            display: block;
-            margin: 20px auto 0 auto;
-            width: 1000px;
-            height: 300px;
+        /* Logo */
+
+        .logo-container{
+            text-align:center;
+            margin-top:20px;
         }
 
-    
+        .logo{
+            width:1000px;
+            max-width:95%;
+            height:auto;
+        }
+
+        /* Navigation */
+
+        .buttons{
+            margin-top:40px;
+
+            display:flex;
+            justify-content:space-evenly;
+            align-items:center;
+
+            width:100%;
+        }
+
+        .buttons img{
+            width:220px;     
+            height:auto;
+            transition:.2s;
+            image-rendering:auto;
+        }
+
+        .buttons img:hover{
+            transform:translateY(-5px) scale(1.05);
+            filter:drop-shadow(0 0 10px white);
+        }
+
     </style>
 </head>
 
 <body>
 
-    <img src="/img/colonelianswebsite.png" alt="Image" class="top-image">
-    
+    <div class="logo-container">
+        <img src="/img/colonelianswebsite.png" alt="Colonelians" class="logo">
+    </div>
+
+    <div class="buttons">
+
+        <a href="/directories/members/">
+            <img src="/img/members.png" alt="Members">
+        </a>
+
+        <a href="/directories/gallery/">
+            <img src="/img/gallery.png" alt="Gallery">
+        </a>
+
+        <a href="/directories/extra/">
+            <img src="/img/extra.png" alt="Extras">
+        </a>
+
+    </div>
+
 </body>
 </html>
