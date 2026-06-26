@@ -39,20 +39,24 @@
             height: auto;
         }
 
-      .buttons {
-    margin: 40px auto 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    width: min(95%, 1250px);
-}
+        .buttons {
+            margin: 40px auto 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            width: min(95%, 1250px);
+        }
 
         .buttons img {
             width: 220px;
             max-width: 80vw;
             height: auto;
             transition: transform 0.2s, filter 0.2s;
+        }
+
+        .buttons .members-button {
+            width: 260px;
         }
 
         .buttons img:hover {
@@ -68,16 +72,16 @@
     </div>
 
     <div class="buttons">
-<a href="directories/members.html">        
-    <img src="/img/members.png" alt="Members">
+        <a href="directories/members.html">
+            <img src="/img/members.png" alt="Members" class="members-button">
         </a>
 
-<a href="directories/gallery.html">         
-    <img src="/img/gallery.png" alt="Gallery">
+        <a href="directories/gallery.html">
+            <img src="/img/gallery.png" alt="Gallery">
         </a>
 
-<a href="directories/extras.html">        
-    <img src="/img/extra.png" alt="Extras">
+        <a href="directories/extras.html">
+            <img src="/img/extra.png" alt="Extras">
         </a>
     </div>
 </body>
