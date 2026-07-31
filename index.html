@@ -69,9 +69,14 @@
 
 <body>
 
-<audio autoplay loop>
-  <source src="/audio/CalendarGirl.mp3" type="audio/mpeg">
-</audio>
+<script>
+const song = new Audio("audio/CalendarGirl.mp3");
+song.loop = true;
+song.volume = 1;
+document.addEventListener('click', (event) => {
+song.play();
+});
+</script>
 
 
     
